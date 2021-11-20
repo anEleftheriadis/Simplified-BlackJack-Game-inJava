@@ -1,0 +1,46 @@
+import java.util.Random;
+ 
+public class Dealer {
+	private int showing,hidden,hitcard;
+	private int sumc1c2;
+	private Random generator;
+	public boolean burnt=false;
+	
+	public Dealer(Random generator){
+		this.generator=generator;
+	}
+	public void drawCards(){
+		this.showing=generator.nextInt(10);  
+		this.showing+=2;
+		this.hidden=generator.nextInt(10);
+		this.hidden+=2;
+		this.Sum(this.showing,this.hidden);
+	}
+	public void Sum(int c1,int c2){
+		this.sumc1c2=c1 + c2;
+	}
+	public int getShowing(){
+		return this.showing;
+	}
+	public int getHidden(){
+		return this.hidden;	
+	}
+	public int getSum(){
+		return this.sumc1c2;
+	}
+	public int hit() {
+		do{
+			this.hitcard=generator.nextInt(10);
+		}while(this.hitcard <= 0 && this.hitcard >= 9);
+		this.hitcard+=2;
+		System.out.println("Dealer chooses to hit.");
+		System.out.println("He draws a "+this.hitcard+".");
+		return this.hitcard;
+	}
+	public boolean lost() {
+		return this.burnt;
+	}
+	public void setLost(boolean flag) {
+		this.burnt = flag;
+	}	
+}
